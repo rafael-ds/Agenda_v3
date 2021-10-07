@@ -7,11 +7,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agenda - Deashboard</title>
+        <title>Agenda - Adicionar Contatos</title>
 
         {% bootstrap_css %}
-
-        <link rel="stylesheet" href="{% static 'css/estilo_home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/estilo_novoCont.css' %}">
 
     </head>
 
@@ -56,38 +55,44 @@
         <!--Fim Cabeçalho-->
 
         <!--Corpo - Tabela-->
-        <section class="corpo container-fluid mt-5">
-          <center>
-            <div class="container">
-              <div class="row">
-                
-                <table class="table">
-                  <thead class="thead-dark">                    
-                    <tr>
-                      <!--<th scope="col">ID</th>-->
-                      <th scope="col">Nome </th>
-                      <th scope="col">Telefone</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Categoria</th>
-                    
-                  </thead>
+        <section class="container-fluid mt-5">
+            <div class="container cont">              
+              <h1 class="text-center">Adicionar Contato</h1>
 
-                  <tbody>
-                    {% for contato in contatos %}
-                      <tr class="text-center">
-                        <!--<th scope="row">{{contato.id}}</th>-->
-                        <td>{{contato.nome}}</td>
-                        <td>{{contato.telefone}}</td>
-                        <td>{{contato.email}}</td>
-                        <td>{{contato.categoria}}</td>
-                      </tr>                    
-                    {% endfor %}
-                  </tbody>
-                </table>               
+              <form action="" method="POST">
+                {% csrf_token %}
 
-              </div>
+                {% bootstrap_messages %}
+
+                <div class="form-group">
+                  <label for="usr">Name:</label>
+                  <input type="text"  name="nome" class="form-control" id="usr" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="usr">Telefone:</label>
+                  <input type="text"  name="telefone" class="form-control" id="usr" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="usr">Email:</label>
+                  <input type="email"  name="email" class="form-control" id="usr">
+                </div>
+
+                <select name="cardes" class="custom-select mb-5" required>
+                  <option selected>Categoria</option>
+                  <option value="1">Familia</option>
+                  <option value="2">Amigos</option>
+                  <option value="3">Colegas</option>
+                  <option value="4">Conhecidos</option>
+                  <option value="5">Estudos</option>
+                  <option value="6">Trabalho</option>
+                </select>
+
+                <button class="btn btn-primary">Enviar</button>
+              </form>
+              
             </div>
-          </center>
         </section>
         <!--Fim Corpo - Tabela-->
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'raiz',
     'bootstrap4',
+    'stdimage',
 ]
 
 MIDDLEWARE = [
