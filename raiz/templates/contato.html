@@ -7,12 +7,11 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agenda - Deashboard</title>
+        <title>Agenda - Contato</title>
 
         {% bootstrap_css %}
 
         <link rel="stylesheet" href="{% static 'css/estilo_home.css' %}">
-
 
     </head>
 
@@ -43,12 +42,8 @@
                               </li>
                           </ul>
 
-                          <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busca' %}">
-
-                            <input class="form-control mr-sm-2 buscar" type="search" 
-                                   placeholder="Pesquisar" name="termo" 
-                                   value="{{ reques.GET.termo }}" aria-label="Pesquisar">
-
+                          <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2 buscar" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
                             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
                           </form>
 
@@ -64,42 +59,25 @@
         <section class="corpo container-fluid mt-5">
           <center>
             <div class="container">
-              <div class="row">
                 
-                <table class="table">
-                  <thead class="thead-dark">                    
-                    <tr>
-                      
-                      <!--<th scope="col">ID</th>-->
-                      <th scope="col">Nome </th>
-                      <th scope="col">Telefone</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Categoria</th>
-                      <th scope="col">Editar</th>
-                      <th scope="col">Exluir</th>
-                    
-                  </thead>
+                <h1 class="mt-5">{{contato.nome}}</h1>
+                
+                <dl>
+                    <dt>ID</dt>
+                    <dd>{{contato.id}}</dd>
 
-                  <tbody >
-                    {% for contato in contatos %}
-                      <tr class="text-center">
-                        <!--<th scope="row">{{contato.id}}</th>-->
-                        <td>
-                          <a href="{% url 'contato' contato.id %}">{{contato.nome}}</a>
-                        </td>
-                        <td>{{contato.telefone}}</td>
-                        <td>{{contato.email}}</td>
-                        <td>{{contato.categoria}}</td>
-                        <td>
-                          <img  class="icon_delete" src="{% static 'imagens/icon_edit.png' %}" alt="">
-                        </td>
-                        <td>
-                          <img class="icon_delete" src="{% static 'imagens/icon_delete.png' %}" alt="">
-                        </td>
-                      </tr>                    
-                    {% endfor %}
-                  </tbody>
-                </table>               
+                    <dt>Telefone</dt>
+                    <dd>{{contato.telefone}}</dd>
+
+                    <dt>Email</dt>
+                    <dd>{{contato.email}}</dd>
+
+                    <dt>Categoria</dt>
+                    <dd>{{contato.categoria}}</dd>
+
+                    <dt>Data de inserção</dt>
+                    <dd>{{contato.data_regis}}</dd>
+                </dl>
 
               </div>
             </div>

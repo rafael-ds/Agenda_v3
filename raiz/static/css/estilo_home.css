@@ -25,6 +25,11 @@ table thead tr th {
     
 }
 
+.icon_delete{
+    width: 30px;
+ 
+}
+
 
 .rodape {
     background-color: #F8F9FA;

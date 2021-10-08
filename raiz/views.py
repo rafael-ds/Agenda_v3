@@ -88,7 +88,7 @@ def home(request):
     return render(request, 'home.html', contesto)
 
 
-
+# Views de postagem de novo contato
 @login_required(redirect_field_name='index')
 def novoContato(request):
     if request.method != 'POST':
@@ -107,17 +107,25 @@ def novoContato(request):
         messages.success(request, 'Contato inserido com sucesso.')
         return redirect('novoContato')
 
-    """if request.method != 'POST':
-        form = FormContato()
-        return render(request, 'novoContato.html', {'formulario': form})
+# Views mostra um unico contato
+#contato_id --> argumento que indicado na na urls
+def contato(request, contato_id):
+    contato = Contato.objects.get(id=contato_id)
+    contesto = {
+        'contato': contato
+    }
 
-    form = FormContato(request.POST)
+    return render(request, 'contato.html', contesto)
 
-    if not form.is_valid():
-        messages.error(request, 'Erro ao enviar o formulario.')
-        form = FormContato(request.POST)
-        return render(request, 'novoContato.html', {'formulario': form})
-    
-    form.save()
-    messages.success(request, 'Contatos salvo com sucesso.')
-    return redirect('novoContato')"""
+
+def busca(request):
+    termo = request.GET.get('termo') # nome do campo de pesquisa
+
+    print(termo)
+
+    contatos = Contato.objects.order_by('id').filter(
+        # Obs: sem o __icontains nao ouve retorno
+        nome__icontains=termo,
+    )
+
+    return render(request, 'busca.html', {'contatos': contatos})
