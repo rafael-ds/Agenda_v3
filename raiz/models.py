@@ -1,6 +1,7 @@
 from django.db import models
-from django import forms
 from django.contrib.auth.models import User
+
+from stdimage.models import StdImageField
 
 
 class Categoria(models.Model):
@@ -16,8 +17,9 @@ class Contato(models.Model):
     email = models.EmailField('E-mail', max_length=100, blank=True)
     data_regis = models.DateTimeField('DataRegistro', auto_now_add=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    midias = models.ImageField(null=True, blank=True, upload_to='fotos/%Y/%m')
 
-    categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
+    categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, null=True)
     
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 

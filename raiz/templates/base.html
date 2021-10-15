@@ -1,0 +1,99 @@
+
+{% load bootstrap4 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+
+    {% bootstrap_css %}
+
+   <link rel="stylesheet" href="{% static 'css/estilo_home.css' %}">
+
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+    
+<body>
+     <!--Cabeçalho-->
+    <section class="cabecalho">
+        <header class="container-fluid">
+            
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                
+                    <!--<img class="img-fluid img_nav"  src="{% static 'imagens/img_perfil.png' %}" alt="image_perfil">-->
+                    <div class="usuario text-center">
+                        <span>Você esta conctado(a):</span>
+                        <a class="navbar-brand  font-weight-bold text-success" href="{% url 'home' %}">{{user}}</a>
+                    </div>
+
+                    <div class="addSair">
+                        <div class="float-left">
+                            <a class="nav-link " href="{% url 'novoContato' %}">
+                                <span class="material-icons text-dark">
+                                    person_add
+                                </span>
+                            </a>
+                        </div>
+                        <div class="float-left">
+                            <a class="nav-link" name="sair" href="{% url 'sair' %}">
+                                <span class="material-icons text-dark">
+                                exit_to_app
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse menu" id="conteudoNavbarSuportado">                       
+                        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busca' %}">
+
+                            <input class="form-control mr-sm-2 buscar" type="search" 
+                                placeholder="Pesquisar" name="termo" 
+                                value="{{ reques.GET.termo }}" aria-label="Pesquisar">
+
+                            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
+                        </form>
+                    </div>
+
+                    
+                </nav>
+            </div>
+
+        </header>
+    </section>
+    <!--Fim Cabeçalho-->
+    
+    {% block conteudo %}
+    {% endblock %}
+    
+    <!--Roda Pé-->
+    <section class="rodape mt-5">
+        <footer>
+        <div class="container">
+            <div class="row p-4">
+
+            <div class="col-6">Agenda Contato - Django</div>
+            <div class="col-6">
+                <a href="#">
+                Desenvolvido por Rafael Silva
+                </a>
+            </div>
+            
+            </div>
+        </div>
+        </footer>
+    </section>
+    <!--Roda Pé-->
+    {% bootstrap_javascript jquery='full' %}
+</body>
+
+</html>

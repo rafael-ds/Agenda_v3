@@ -1,0 +1,36 @@
+.descContato{
+    overflow: auto;
+    width: 650px;
+}
+
+.descContato img, .imgPerfil{
+    width: 300px;
+}
+
+.descContato dl{
+    width: 300px;
+}
+
+dd, h1{
+    color: darkslategray;
+}
+
+.descricao{
+    height: 378px;
+    border-left: none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+
+
+
+/* Dispositivos small (telefones em modo paisagem, com menos de 768px)*/
+@media (max-width: 767.98px) { 
+    .descContato{
+        overflow: auto;
+        width: 350px;
+    }
+}
+ }

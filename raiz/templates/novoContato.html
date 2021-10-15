@@ -1,123 +1,55 @@
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agenda - Adicionar Contatos</title>
+{% block conteudo %}
 
-        {% bootstrap_css %}
-        <link rel="stylesheet" href="{% static 'css/estilo_novoCont.css' %}">
+<!--Corpo - Tabela-->
+<section class="container-fluid mt-5">
+    <div class="container cont">              
+      <h1 class="text-center">Adicionar Contato</h1>
 
-    </head>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-    <body>
+        {% bootstrap_messages %}
+
+        <div class="form-group">
+          <label for="usr">Name:</label>
+          <input type="text"  name="nome" class="form-control" id="usr" required>
+        </div>
+
+        <div class="form-group">
+          <label for="usr">Telefone:</label>
+          <input type="text"  name="telefone" class="form-control" id="usr" required>
+        </div>
+
+        <div class="form-group">
+          <label for="usr">Email:</label>
+          <input type="email"  name="email" class="form-control" id="usr">
+        </div>
+
+        <select name="cardes" class="custom-select mb-5" required>
+          <option selected>Categoria</option>
+          <option value="1">Familia</option>
+          <option value="2">Amigos</option>
+          <option value="3">Colegas</option>
+          <option value="4">Conhecidos</option>
+          <option value="5">Estudos</option>
+          <option value="6">Trabalho</option>
+        </select>
         
-        <!--Cabeçalho-->
-        <section class="cabecalho">
-            <header class="container-fluid">
-                
-                <div>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <img class="img-fluid img_nav"  src="{% static 'imagens/img_perfil.png' %}" alt="image_perfil">
 
-                        <a class="navbar-brand usuario ml-5" href="{% url 'home' %}">{{user}}</a>
+        <button class="btn btn-primary">Enviar</button>
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                      
-                        <div class="collapse navbar-collapse menu" id="conteudoNavbarSuportado">
-                          <ul class="navbar-nav mr-auto add_topo">
-                            <li class="nav-item active">
-                              <a class="nav-link" href="{% url 'novoContato' %}">Adicionar Contato |<span class="sr-only">(página atual)</span></a>
-                            </li>
+      </form>
 
-                            <li class="nav-item active">
-                                <a class="nav-link" name="sair" href="{% url 'sair' %}">Sair<span class="sr-only">(página atual)</span></a>
-                              </li>
-                          </ul>
-
-                          <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2 buscar" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
-                          </form>
-
-                        </div>
-                    </nav>
-                </div>
-
-            </header>
-        </section>
-        <!--Fim Cabeçalho-->
-
-        <!--Corpo - Tabela-->
-        <section class="container-fluid mt-5">
-            <div class="container cont">              
-              <h1 class="text-center">Adicionar Contato</h1>
-
-              <form action="" method="POST">
-                {% csrf_token %}
-
-                {% bootstrap_messages %}
-
-                <div class="form-group">
-                  <label for="usr">Name:</label>
-                  <input type="text"  name="nome" class="form-control" id="usr" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="usr">Telefone:</label>
-                  <input type="text"  name="telefone" class="form-control" id="usr" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="usr">Email:</label>
-                  <input type="email"  name="email" class="form-control" id="usr">
-                </div>
-
-                <select name="cardes" class="custom-select mb-5" required>
-                  <option selected>Categoria</option>
-                  <option value="1">Familia</option>
-                  <option value="2">Amigos</option>
-                  <option value="3">Colegas</option>
-                  <option value="4">Conhecidos</option>
-                  <option value="5">Estudos</option>
-                  <option value="6">Trabalho</option>
-                </select>
-
-                <button class="btn btn-primary">Enviar</button>
-              </form>
-              
-            </div>
-        </section>
-        <!--Fim Corpo - Tabela-->
-
-        <!--Roda Pé-->
-        <section class="rodape mt-5">
-          <footer>
-            <div class="container">
-              <div class="row p-4">
-
-                <div class="col-6">Agenda Contato - Django</div>
-                <div class="col-6">
-                  <a href="#">
-                    Desenvolvido por Rafael Silva
-                  </a>
-                </div>
-                
-              </div>
-            </div>
-          </footer>
-        </section>
-        <!--Roda Pé-->
+      
+    </div>
+</section>
+<!--Fim Corpo - Tabela-->
+{% endblock %}
 
 
-        {% bootstrap_javascript jquery='full' %}
 
-    </body>
-
-</html>
+{% bootstrap_javascript jquery='full' %}

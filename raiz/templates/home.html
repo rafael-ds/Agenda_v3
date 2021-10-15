@@ -1,134 +1,69 @@
+{% extends 'base.html' %}
 {% load bootstrap4 %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agenda - Deashboard</title>
-
-        {% bootstrap_css %}
-
-        <link rel="stylesheet" href="{% static 'css/estilo_home.css' %}">
-
-
-    </head>
-
-    <body>
-        
-        <!--Cabeçalho-->
-        <section class="cabecalho">
-            <header class="container-fluid">
+{% block conteudo %}
+  <!--Corpo - Tabela-->
+  <section class="corpo container-fluid mt-5">
+    {% bootstrap_messages %}
+    <center>
+      <div class="container">
+        <div class="row">
+          
+          <table class="table">
+            <thead class="thead-dark">                    
+              <tr>
                 
-                <div>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <img class="img-fluid img_nav"  src="{% static 'imagens/img_perfil.png' %}" alt="image_perfil">
+                <!--<th scope="col">ID</th>-->
+                <th scope="col">Nome </th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Exluir</th>
+              
+            </thead>
 
-                        <a class="navbar-brand usuario ml-5" href="{% url 'home' %}">{{user}}</a>
+            <tbody >
+              {% for contato in contatos %}
+                <tr class="text-center">
+                  <!--<th scope="row">{{contato.id}}</th>-->
+                  <td>                    
+                    <a href="{% url 'contato' contato.id %}">{{contato.nome}}</a>
+                  </td>
+                  <td>{{contato.telefone}}</td>
+                  <td>{{contato.email}}</td>
+                  <td>{{contato.categoria}}</td>
+                  <td>  
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                      
-                        <div class="collapse navbar-collapse menu" id="conteudoNavbarSuportado">
-                          <ul class="navbar-nav mr-auto add_topo">
-                            <li class="nav-item active">
-                              <a class="nav-link" href="{% url 'novoContato' %}">Adicionar Contato |<span class="sr-only">(página atual)</span></a>
-                            </li>
+                    <!--Edição com erro-->
+                    <form action="#" method="post">
+                      {% csrf_token %}
+                      <!--{{form.as_p}}-->
+                      <button type="submit" class="btn btn-success" value="Editar">Editar</button>                          
+                    </form>
+                    </td>
 
-                            <li class="nav-item active">
-                                <a class="nav-link" name="sair" href="{% url 'sair' %}">Sair<span class="sr-only">(página atual)</span></a>
-                              </li>
-                          </ul>
+                  <td>
 
-                          <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busca' %}">
+                    <form action="{% url 'delete' contato.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger" value="Deletar post">Exluir</button>                          
+                    </form>
 
-                            <input class="form-control mr-sm-2 buscar" type="search" 
-                                   placeholder="Pesquisar" name="termo" 
-                                   value="{{ reques.GET.termo }}" aria-label="Pesquisar">
+                  </td>
+                </tr>                    
+              {% endfor %}
+            </tbody>
+          </table>               
 
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
-                          </form>
+        </div>
+      </div>
+    </center>
+  </section>
+  <!--Fim Corpo - Tabela-->
 
-                        </div>
-                    </nav>
-                </div>
-
-            </header>
-        </section>
-        <!--Fim Cabeçalho-->
-
-        <!--Corpo - Tabela-->
-        <section class="corpo container-fluid mt-5">
-          <center>
-            <div class="container">
-              <div class="row">
-                
-                <table class="table">
-                  <thead class="thead-dark">                    
-                    <tr>
-                      
-                      <!--<th scope="col">ID</th>-->
-                      <th scope="col">Nome </th>
-                      <th scope="col">Telefone</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Categoria</th>
-                      <th scope="col">Editar</th>
-                      <th scope="col">Exluir</th>
-                    
-                  </thead>
-
-                  <tbody >
-                    {% for contato in contatos %}
-                      <tr class="text-center">
-                        <!--<th scope="row">{{contato.id}}</th>-->
-                        <td>
-                          <a href="{% url 'contato' contato.id %}">{{contato.nome}}</a>
-                        </td>
-                        <td>{{contato.telefone}}</td>
-                        <td>{{contato.email}}</td>
-                        <td>{{contato.categoria}}</td>
-                        <td>
-                          <img  class="icon_delete" src="{% static 'imagens/icon_edit.png' %}" alt="">
-                        </td>
-                        <td>
-                          <img class="icon_delete" src="{% static 'imagens/icon_delete.png' %}" alt="">
-                        </td>
-                      </tr>                    
-                    {% endfor %}
-                  </tbody>
-                </table>               
-
-              </div>
-            </div>
-          </center>
-        </section>
-        <!--Fim Corpo - Tabela-->
-
-        <!--Roda Pé-->
-        <section class="rodape mt-5">
-          <footer>
-            <div class="container">
-              <div class="row p-4">
-
-                <div class="col-6">Agenda Contato - Django</div>
-                <div class="col-6">
-                  <a href="#">
-                    Desenvolvido por Rafael Silva
-                  </a>
-                </div>
-                
-              </div>
-            </div>
-          </footer>
-        </section>
-        <!--Roda Pé-->
+{% endblock %}
 
 
-        {% bootstrap_javascript jquery='full' %}
 
-    </body>
-
-</html>
+{% bootstrap_javascript jquery='full' %}

@@ -6,18 +6,12 @@
 
 }
 
-.img_nav{
-    width: 50px;
-}
-
-nav .usuario{
-    font-size: 1em;
-    color: darkcyan;
+.addSair{
+    margin-left: 600px;
 }
 
 
 table thead tr th {
-    border: solid blue 1px;
     width: 30px;
 
     text-align: center;
@@ -31,10 +25,9 @@ table thead tr th {
 }
 
 
+
 .rodape {
     background-color: #F8F9FA;
-
-    margin-bottom: 0;
 }
 
 
@@ -54,17 +47,15 @@ table thead tr th {
     .add_topo {
     margin-left: 0px;
 }
+
+    .addSair{
+        margin-left: 1px;
+    }
+
+    .buscar{
+        width: 73%;
+    }
+
+
+    
  }
-
-/* Dispositivos médios (tablets com menos de 992px)*/
-@media (max-width: 991.98px) { 
-
- }
-
-/* Dispositivos large (desktops com menos de 1200px)*/
-@media (max-width: 1199.98px) { 
-
- }
-
-/* Dispositivos extra large (desktops grandes)
-Nenhuma media query, já que o breakpoint extra large não possui nenhum limite acima.*/
